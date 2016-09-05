@@ -1,4 +1,2 @@
-# IPITS
-A Project for updating ipits Software
-
-#Contents
+## IPITS
+A Project for ipits in Tongji Univ.
