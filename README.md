@@ -1,2 +1,2 @@
 ## IPITS
-A Project for ipits in Tongji Univ.
+Simulation for the study of stablization for two lane model.
