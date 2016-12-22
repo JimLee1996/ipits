@@ -10,9 +10,9 @@ using namespace std;
 
 
 
-/////¹¦ÄÜº¯Êı/////
+/////åŠŸèƒ½å‡½æ•°/////
 
-//´Ó´óµ½Ğ¡ÅÅĞò
+//ä»å¤§åˆ°å°æ’åº
 void sort(double arr[], int n)     
 {
 	int i, j, k;
@@ -34,26 +34,26 @@ void sort(double arr[], int n)
 
 
 
-/////³µÁ¾Àà¶¨ÒåÓëÊµÏÖ/////
+/////è½¦è¾†ç±»å®šä¹‰ä¸å®ç°/////
 class Vehicle : public CObject
 {
 public:
-	Vehicle(int number, double position, double speed, double acceleration, double headway, bool lane, double distf); //ÒıÈëÁÙ½ü×îÇ°³µĞÅÏ¢
+	Vehicle(int number, double position, double speed, double acceleration, double headway, bool lane, double distf); //å¼•å…¥ä¸´è¿‘æœ€å‰è½¦ä¿¡æ¯
 	~Vehicle();
 	
 	int	   Number;
 	
-	double Position[301];//ÀúÊ·Î»ÖÃ
-	double Speed[301];//ÀúÊ·ËÙ¶È
-	double Distf[301];//ÀúÊ·ÁÙ³µ¾à
+	double Position[301];//å†å²ä½ç½®
+	double Speed[301];//å†å²é€Ÿåº¦
+	double Distf[301];//å†å²ä¸´è½¦è·
 
 	double Headway;
 	double Acceleration;
 	bool   LaneNumber;//left=0,right=1
 };
 
-//  ³µÁ¾¹¹Ôìº¯Êı	   ³µºÅ	 		Î»ÖÃ			ËÙ¶È			¼ÓËÙ¶È			³µÍ·¾à		  ³µµÀ		ÁÙ³µµÀ³µÍ·¾à
-Vehicle::Vehicle(int number, double position, double speed, double acceleration, double headway, bool lane, double distf)    //ÒıÈëÁÙ½ü×îÇ°³µĞÅÏ¢
+//  è½¦è¾†æ„é€ å‡½æ•°	   è½¦å·	 		ä½ç½®			é€Ÿåº¦			åŠ é€Ÿåº¦			è½¦å¤´è·		  è½¦é“		ä¸´è½¦é“è½¦å¤´è·
+Vehicle::Vehicle(int number, double position, double speed, double acceleration, double headway, bool lane, double distf)    //å¼•å…¥ä¸´è¿‘æœ€å‰è½¦ä¿¡æ¯
 {
 	Number = number;
 //	Position[0] = position;
@@ -78,7 +78,7 @@ Vehicle::~Vehicle()
 
 
 
-/////³µµÀÀà¶¨ÒåÓëÊµÏÖ/////
+/////è½¦é“ç±»å®šä¹‰ä¸å®ç°/////
 class Road : public CObject
 {
 public:
@@ -90,21 +90,21 @@ public:
 	void Iteration(CObList* &plist, CObList* &planechange, const double &L, int i, const double &ay, const double &aq, const int &tao, const double &hd);
 	//
 	//
-	//¼ÓÈë¸ÉÈÅÖ®ºó£¬ÁÙ³µ¾àÒ²»á¸Ä±ä£¬ºóÃæ×¢Òâ
+	//åŠ å…¥å¹²æ‰°ä¹‹åï¼Œä¸´è½¦è·ä¹Ÿä¼šæ”¹å˜ï¼Œåé¢æ³¨æ„
 	//
 	//
-	//¸üĞÂ×´Ì¬
+	//æ›´æ–°çŠ¶æ€
 	void Update(int time, CObList* &plist, CObList* &planechange, double &xfc, const double &L, const int &tao);
 
-	///¼Ó³µº¯Êı///
+	///åŠ è½¦å‡½æ•°///
 	void InsertAtTail(CObList* &porigin, CObList* &ptarget, Vehicle* &thisCar);
 	void InsertAtMiddle(CObList* &porigin, CObList* &ptarget, Vehicle* &thisCar, Vehicle* &carLeading, int i);
-	///¼Ó³µº¯Êı///
+	///åŠ è½¦å‡½æ•°///
 	
-	//»»µÀº¯Êı
+	//æ¢é“å‡½æ•°
 	void LaneChange(CObList* &plist, CObList* &planechange, Vehicle* &thisCar, const double &xfc, const double L, int i);
 
-	CObList queue;//³µµÄ¶ÓÁĞ
+	CObList queue;//è½¦çš„é˜Ÿåˆ—
 
 };
 
@@ -115,7 +115,7 @@ Road::~Road()
 {
 }
 
-//   µÀÂ·¼Ó³µº¯Êı		³µµÀÁ´±í			³µÁ¾Êı				³µµÀ³¤¶È			 ÀíÏë³µÍ·¾à				³µµÀºÅ				 ÓÅ»¯ËÙ¶È          ÁÙ³µµÀ³µÍ·¾à
+//   é“è·¯åŠ è½¦å‡½æ•°		è½¦é“é“¾è¡¨			è½¦è¾†æ•°				è½¦é“é•¿åº¦			 ç†æƒ³è½¦å¤´è·				è½¦é“å·				 ä¼˜åŒ–é€Ÿåº¦          ä¸´è½¦é“è½¦å¤´è·
 void Road::AddVehicle(CObList* &plist, const int &carSum, const double &Length, const double &carHeadway, const bool &lanenumber, double OptimumV, double distf) //distf
 {
 	for (int i = 1; i<carSum + 1; i++)
@@ -123,23 +123,23 @@ void Road::AddVehicle(CObList* &plist, const int &carSum, const double &Length, 
 		if (lanenumber == 0)
 		{
 			Vehicle* vehicle = new Vehicle(i, Length + carHeadway / 2.0 - i*carHeadway, OptimumV, 0, carHeadway, lanenumber, distf);
-					//  ³µÁ¾¹¹Ôìº¯Êı	   ³µºÅ	 		Î»ÖÃ Ğ¡ºÅ³µÔÚÇ°                 ËÙ¶È   ¼ÓËÙ¶È ³µÍ·¾à		 ³µµÀ	ÁÙ³µµÀ³µÍ·¾à			
+					//  è½¦è¾†æ„é€ å‡½æ•°	   è½¦å·	 		ä½ç½® å°å·è½¦åœ¨å‰                 é€Ÿåº¦   åŠ é€Ÿåº¦ è½¦å¤´è·		 è½¦é“	ä¸´è½¦é“è½¦å¤´è·			
 
 			plist->AddTail(vehicle);
 		}
 		else
 		{
-			Vehicle* vehicle = new Vehicle(i+100,           Length - i*carHeadway        , OptimumV, 0, carHeadway, lanenumber, distf);  //¼Ó³µÒ×´í
+			Vehicle* vehicle = new Vehicle(i+100,           Length - i*carHeadway        , OptimumV, 0, carHeadway, lanenumber, distf);  //åŠ è½¦æ˜“é”™
 			plist->AddTail(vehicle);
 		}
 	}
 }
 
-//      ¼ÓÈë¸ÉÈÅº¯Êı    ³µµÀÁ´±í        ÁÙ³µµÀÁ´±í            ³µµÀ³¤¶È        Ñ­»·´ÎÊı      È¨ÖØ			È¨ÖØ              ÑÓÊ±            °²È«³µ¾à
+//      åŠ å…¥å¹²æ‰°å‡½æ•°    è½¦é“é“¾è¡¨        ä¸´è½¦é“é“¾è¡¨            è½¦é“é•¿åº¦        å¾ªç¯æ¬¡æ•°      æƒé‡			æƒé‡              å»¶æ—¶            å®‰å…¨è½¦è·
 void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, int i, const double &ay, const double &aq, const int &tao, const double &hd)
 {
 
-// Êä³öÎÈ¶¨µã
+// è¾“å‡ºç¨³å®šç‚¹
 
 	ofstream outfile1("left1.txt", ofstream::out | ofstream::app);
 	ofstream outfile2("right1.txt", ofstream::out | ofstream::app);
@@ -152,14 +152,14 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 
 
 	double OptimumV;
-	double t = 0.01;			//Ã¿²½³¤ÏÂËùÇ°½øµÄ×îĞ¡Ê±¼äµ¥Î»
+	double t = 0.01;			//æ¯æ­¥é•¿ä¸‹æ‰€å‰è¿›çš„æœ€å°æ—¶é—´å•ä½
 	/////////////////////////////////////////////////
-	double lambda1 = 0.4;		//·´À¡ÏµÊı
+	double lambda1 = 0.4;		//åé¦ˆç³»æ•°
 	double lambda2 = 0.4;
 	////////////////////////////////////////////////
-	double k1, k2, k3, k4;      //Áú¸ñ¿âËş·¨ÏµÊı
+	double k1, k2, k3, k4;      //é¾™æ ¼åº“å¡”æ³•ç³»æ•°
 	////////////////////////////////////////////////
-	double a1 = 2.0;			//¼İÊ»Ô±Ãô¸ĞÏµÊı
+	double a1 = 2.0;			//é©¾é©¶å‘˜æ•æ„Ÿç³»æ•°
 	double a2 = 2.0;
 
 
@@ -167,34 +167,34 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 ///////////////////////////////////////////////////////////////////
 
 	POSITION post = plist->GetTailPosition();
-	Vehicle* FrontalCar = (Vehicle*)(plist->GetAt(post));  //µÚÒ»Á¾³µµÄÇ°³µ
+	Vehicle* FrontalCar = (Vehicle*)(plist->GetAt(post));  //ç¬¬ä¸€è¾†è½¦çš„å‰è½¦
 
 	Vehicle* thisCar;
-	POSITION pos = plist->GetHeadPosition();               //µÚÒ»Á¾³µ
+	POSITION pos = plist->GetHeadPosition();               //ç¬¬ä¸€è¾†è½¦
 
 	int N = planechange->GetCount();
 
-	while (pos)  //±éÀú
+	while (pos)  //éå†
 	{
 		thisCar = (Vehicle*)(plist->GetNext(pos));
-		//Èô³¬³ö³µµÀ³¤¶È·¶Î§£¬ÔòĞŞÕı³µÁ¾Î»ÖÃ
+		//è‹¥è¶…å‡ºè½¦é“é•¿åº¦èŒƒå›´ï¼Œåˆ™ä¿®æ­£è½¦è¾†ä½ç½®
 		if (thisCar->Position[0] >= L)
 			thisCar->Position[0] = thisCar->Position[0] - L;
 		if (FrontalCar->Position[0] >= L)
 			FrontalCar->Position[0] = FrontalCar->Position[0] - L;
 
 
-		//¼ÆËã³µÓëÇ°³µµÄ³µ¼ä¾à
+		//è®¡ç®—è½¦ä¸å‰è½¦çš„è½¦é—´è·
 		thisCar->Headway = FrontalCar->Position[0] - thisCar->Position[0];
 
-		///////³µÍ·¾àĞŞÕı///////
+		///////è½¦å¤´è·ä¿®æ­£///////
 		if (thisCar->Headway< 0)
 			thisCar->Headway += L;
 
 
 		
-		//¼ÓÈëÈÅ¶¯£¬µÚ25Á¾³µÓëÇ°³µµÄ³µ¼ä¾à¼õÖÁÔ­Ê¼³µ¼ä¾àµÄ30%
-		//³µÍ·¾à»áÓĞ¸üĞÂ£¬ËùÒÔ¶à´ÎÉè¶¨
+		//åŠ å…¥æ‰°åŠ¨ï¼Œç¬¬25è¾†è½¦ä¸å‰è½¦çš„è½¦é—´è·å‡è‡³åŸå§‹è½¦é—´è·çš„30%
+		//è½¦å¤´è·ä¼šæœ‰æ›´æ–°ï¼Œæ‰€ä»¥å¤šæ¬¡è®¾å®š
 		if (i >= 100 && i <= 150)
 		{
 			if (thisCar->Number == 25)
@@ -202,19 +202,19 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 				thisCar->Headway = thisCar->Headway * 0.3;
 				thisCar->Position[0] = thisCar->Position[0] + 0.7 * thisCar->Headway;
 				thisCar->Distf[0] = thisCar->Distf[0] - 0.7 * thisCar->Headway;
-				//ÅĞ¶ÏÊÇ·ñ³¬³ö
+				//åˆ¤æ–­æ˜¯å¦è¶…å‡º
 				if (thisCar->Position[0] >= L)
 					thisCar->Position[0] = thisCar->Position[0] - L;
 				if (thisCar->Distf[0] < 0)
-					thisCar->Distf[0] = thisCar->DistF[0] + L;
+					thisCar->Distf[0] = thisCar->Distf[0] + L;
 			}
 		}
 		
 		
 		
-		//ÁÙ³µµÀ
+		//ä¸´è½¦é“
 		POSITION posNL = planechange->GetHeadPosition();
-		//ÓÃÓÚÅÅĞò
+		//ç”¨äºæ’åº
 		double *position = new double[N + 1];
 		int p = 0;
 		while (posNL != NULL)
@@ -226,11 +226,11 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 		position[N] = thisCar->Position[0];
 
 
-		///////////ÁÙ³µµÀÇ°³µ¾àÀë¼ÆËã///////////
+		///////////ä¸´è½¦é“å‰è½¦è·ç¦»è®¡ç®—///////////
 
-		//ÏàÁÚ³µµÀ×îÁÚÇ°³µÎ»ÖÃ£¬ÒÔ¼°±¾³µÓëÆä¾àÀë
+		//ç›¸é‚»è½¦é“æœ€é‚»å‰è½¦ä½ç½®ï¼Œä»¥åŠæœ¬è½¦ä¸å…¶è·ç¦»
 		double frontcarpos, DistanceF;
-		//´Ó´óµ½Ğ¡½øĞĞÅÅĞò
+		//ä»å¤§åˆ°å°è¿›è¡Œæ’åº
 		sort(position, N + 1);
 		for (int k = 0; k< N + 1; k++)
 		{
@@ -244,16 +244,16 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 			}
 		}
 		delete[] position;
-		//¼ÆËã±¾³µÓëÏàÁÚ³µµÀ×î½üÇ°³µµÄ³µ¼ä¾àÀë
+		//è®¡ç®—æœ¬è½¦ä¸ç›¸é‚»è½¦é“æœ€è¿‘å‰è½¦çš„è½¦é—´è·ç¦»
 		DistanceF = frontcarpos - thisCar->Position[0];
 		if (DistanceF<0)
 			DistanceF += L;
 
 
 
-		////////ºËĞÄ²¿·Ö/////////
+		////////æ ¸å¿ƒéƒ¨åˆ†/////////
 		
-		//ÓÅ»¯ËÙ¶È¼ÆËã
+		//ä¼˜åŒ–é€Ÿåº¦è®¡ç®—
 		OptimumV = tanh(ay*thisCar->Headway + aq*DistanceF - hd) + tanh(hd);
 		////////////////////////////////////////////////
 		double v0 = 15;
@@ -266,7 +266,7 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 		
 		
 		////////////////////////////////////////////////
-		//¼ÓËÙ¶È¼ÆËã
+		//åŠ é€Ÿåº¦è®¡ç®—
 		if (thisCar->LaneNumber == 0)
 			//thisCar->Acceleration = a1*(OptimumV - thisCar->Speed[tao]) + lambda1*(thisCar->Speed[tao] - thisCar->Speed[1]);
 			thisCar->Acceleration = a1*(OptimumV - thisCar->Speed[tao]) + lambda1*(thisCar->Distf[tao] - thisCar->Distf[1]);
@@ -274,7 +274,7 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 			//thisCar->Acceleration = a2*(OptimumV - thisCar->Speed[tao]) + lambda2*(thisCar->Speed[tao] - thisCar->Speed[1]);
 			thisCar->Acceleration = a2*(OptimumV - thisCar->Speed[tao]) + lambda2*(thisCar->Distf[tao] - thisCar->Distf[1]);
 
-		//ËÙ¶È¼ÆËã£¬ËÄ´ÎÁú¸ñ¿âËş
+		//é€Ÿåº¦è®¡ç®—ï¼Œå››æ¬¡é¾™æ ¼åº“å¡”
 		if (thisCar->LaneNumber == 0)
 		{
 			//k1 = t*(a1*(OptimumV - thisCar->Speed[tao]) + lambda1*(thisCar->Speed[tao] - thisCar->Speed[1]));
@@ -306,11 +306,11 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 		}
 
 		
-		//////////ºËĞÄ²¿·Ö//////////
+		//////////æ ¸å¿ƒéƒ¨åˆ†//////////
 			
 		
-		//¸üĞÂËÙ¶ÈºÍÎ»ÖÃ
-		//ËÙ¶È²»ÔÊĞíÎª¸º£¬×î¹ıÍ£ÏÂÀ´
+		//æ›´æ–°é€Ÿåº¦å’Œä½ç½®
+		//é€Ÿåº¦ä¸å…è®¸ä¸ºè´Ÿï¼Œæœ€è¿‡åœä¸‹æ¥
 		if (thisCar->Speed[tao] <= 0)
 		{
 			thisCar->Position[tao] = thisCar->Position[tao - 1];
@@ -320,13 +320,13 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 		else
 			thisCar->Position[tao] = thisCar->Position[tao-1] + thisCar->Speed[tao] * t + 0.5*thisCar->Acceleration * t * t;
 			thisCar->Distf[tao] = DistanceF;	
-			//ÒÑĞŞ¸Ä
+			//å·²ä¿®æ”¹
 
-		//³¬³ÌÇåÁã	
+		//è¶…ç¨‹æ¸…é›¶	
 		if (thisCar->Position[tao] >= L)
 			thisCar->Position[tao] = thisCar->Position[tao] - L;
 
-		//¸üĞÂĞÅÏ¢
+		//æ›´æ–°ä¿¡æ¯
 		for (int j = 1; j<tao; j++)
 		{
 			thisCar->Speed[j] = thisCar->Speed[j + 1];
@@ -337,10 +337,10 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 
 
 
-		//Êä³öµ½.txtÎÄ¼şÖĞ
+		//è¾“å‡ºåˆ°.txtæ–‡ä»¶ä¸­
 		if (i < 20000 && i % 100 == 0)
 		{
-			// ¿¼ÂÇ»»µÀÖ®ºó£¬³µµÄ³µµÀĞÅÏ¢±»¸ü»»
+			// è€ƒè™‘æ¢é“ä¹‹åï¼Œè½¦çš„è½¦é“ä¿¡æ¯è¢«æ›´æ¢
 			if (thisCar->LaneNumber == 0)
 				outfile5 << i << "   " << thisCar->Number << "   " << thisCar->LaneNumber << "   " << thisCar->Position[tao] << "   " << thisCar->Speed[tao] << "   " << thisCar->Acceleration << "   " << thisCar->Headway << "   " << thisCar->Distf[tao] << endl;
 			else
@@ -349,7 +349,7 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 		
 		if (i > 130000 && i % 100 == 0)
 		{
-			// ¿¼ÂÇ»»µÀÖ®ºó£¬³µµÄ³µµÀĞÅÏ¢±»¸ü»»
+			// è€ƒè™‘æ¢é“ä¹‹åï¼Œè½¦çš„è½¦é“ä¿¡æ¯è¢«æ›´æ¢
 			if (thisCar->LaneNumber == 0)
 				outfile1 << i << "   " << thisCar->Number << "   " << thisCar->LaneNumber << "   " << thisCar->Position[tao] << "   " << thisCar->Speed[tao] << "   " << thisCar->Acceleration << "   " << thisCar->Headway << "   " << thisCar->Distf[tao] << endl;
 			else
@@ -363,7 +363,7 @@ void Road::Iteration(CObList* &plist, CObList* &planechange, const double &L, in
 }
 
 
-//    µÀÂ·¸üĞÂ    Ê±¿Ì         ³µµÀ              ÁÙ³µµÀ              °²È«¾àÀë       ³µµÀ³¤¶È       ÑÓÊ±
+//    é“è·¯æ›´æ–°    æ—¶åˆ»         è½¦é“              ä¸´è½¦é“              å®‰å…¨è·ç¦»       è½¦é“é•¿åº¦       å»¶æ—¶
 void Road::Update(int time, CObList* &plist, CObList* &planechange, double &xfc, const double &L, const int &tao)
 {
 	POSITION pos = plist->GetHeadPosition();
@@ -371,7 +371,7 @@ void Road::Update(int time, CObList* &plist, CObList* &planechange, double &xfc,
 	{
 		while (pos)
 		{
-			//¸üĞÂËùÓĞ³µÁ¾µÄÎ»ÖÃÓëËÙ¶ÈĞÅÏ¢
+			//æ›´æ–°æ‰€æœ‰è½¦è¾†çš„ä½ç½®ä¸é€Ÿåº¦ä¿¡æ¯
 			Vehicle* car = (Vehicle*)(plist->GetNext(pos));
 			if (time != 0)
 			{
@@ -379,26 +379,26 @@ void Road::Update(int time, CObList* &plist, CObList* &planechange, double &xfc,
 				car->Speed[0] = car->Speed[tao];
 				car->Distf[0] = car->Distf[tao];
 			}
-			//»»µÀº¯Êı
+			//æ¢é“å‡½æ•°
 			LaneChange(plist, planechange, car, xfc, L, time);
 		}
 	}
 }
 
-//»»µÀ1                        Ô´               Ä¿±ê              ³µ³µ                    
+//æ¢é“1                        æº               ç›®æ ‡              è½¦è½¦                    
 void Road::InsertAtTail(CObList* &porigin, CObList* &ptarget, Vehicle* &thisCar)
 {
 	if (!porigin->IsEmpty())
 	{
-		thisCar->LaneNumber = ((int)(thisCar->LaneNumber + 1)) % 2;//»»µÀ£¬³µµÀºÅÂë 0->1£¬1->0
-		//ÍêÈ«Ã»±ØÒª±ä
+		thisCar->LaneNumber = ((int)(thisCar->LaneNumber + 1)) % 2;//æ¢é“ï¼Œè½¦é“å·ç  0->1ï¼Œ1->0
+		//å®Œå…¨æ²¡å¿…è¦å˜
 		ptarget->AddTail(thisCar);
 		POSITION pos = porigin->Find(thisCar);
 		porigin->RemoveAt(pos);
 	}
 }
 
-//»»µÀ2                        Ô´                Ä¿±ê                ³µ³µ              ³µÍ·£¿           ĞÅÏ¢Êä³öÓÃ
+//æ¢é“2                        æº                ç›®æ ‡                è½¦è½¦              è½¦å¤´ï¼Ÿ           ä¿¡æ¯è¾“å‡ºç”¨
 void Road::InsertAtMiddle(CObList* &porigin, CObList* &ptarget, Vehicle* &thisCar, Vehicle* &carLeading, int i)
 {
 
@@ -407,14 +407,14 @@ void Road::InsertAtMiddle(CObList* &porigin, CObList* &ptarget, Vehicle* &thisCa
 
 	if (!porigin->IsEmpty())
 	{
-		//±¾³µ»»µÀ£¬³µµÀºÅÓÉ0±äÎª1£¬»òÕßÓÉ1±äÎª0
+		//æœ¬è½¦æ¢é“ï¼Œè½¦é“å·ç”±0å˜ä¸º1ï¼Œæˆ–è€…ç”±1å˜ä¸º0
 		thisCar->LaneNumber = ((int)(thisCar->LaneNumber + 1)) % 2;
 		POSITION pos1 = ptarget->Find(carLeading);
 		ptarget->InsertAfter(pos1, thisCar);
 		POSITION posDe = porigin->Find(thisCar);
 		porigin->RemoveAt(posDe);
 
-		//Êä³ö»»µÀĞÅÏ¢/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//è¾“å‡ºæ¢é“ä¿¡æ¯/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		if (thisCar->LaneNumber == 0)
 			outfile3 << i << "   " << thisCar->Number << "   " << thisCar->LaneNumber << "   " << thisCar->Position[0] << "   " << thisCar->Speed[0] << "   " << thisCar->Acceleration << "   " << thisCar->Headway << "   " << thisCar->Distf[0] << endl;
 		else
@@ -426,14 +426,14 @@ void Road::InsertAtMiddle(CObList* &porigin, CObList* &ptarget, Vehicle* &thisCa
 }
 
 
-//    »»µÀº¯Êı			³µµÀ				ÁÙ³µµÀ				³µ³µ				°²È«¾àÀë			³µµÀ³¤¶È	ĞÅÏ¢Êä³öÓÃ
+//    æ¢é“å‡½æ•°			è½¦é“				ä¸´è½¦é“				è½¦è½¦				å®‰å…¨è·ç¦»			è½¦é“é•¿åº¦	ä¿¡æ¯è¾“å‡ºç”¨
 void Road::LaneChange(CObList* &plist, CObList* &planechange, Vehicle* &thisCar, const double &xfc, const double L, int i)
 {
 	if (planechange->GetCount() == 0)
 		InsertAtTail(plist, planechange, thisCar);
 	else
 	{
-		//½«ÏàÁÚ³µµÀËùÓĞ³µÁ¾µÄÎ»ÖÃĞÅÏ¢È«²¿·ÅÖÃÓÚposition[N+1]Êı×éÖĞ
+		//å°†ç›¸é‚»è½¦é“æ‰€æœ‰è½¦è¾†çš„ä½ç½®ä¿¡æ¯å…¨éƒ¨æ”¾ç½®äºposition[N+1]æ•°ç»„ä¸­
 		int N = planechange->GetCount();
 		POSITION PosNL = planechange->GetHeadPosition();
 		double *position = new double[N + 1];
@@ -444,19 +444,19 @@ void Road::LaneChange(CObList* &plist, CObList* &planechange, Vehicle* &thisCar,
 			position[j] = CarNL->Position[0];
 			j++;
 		}
-		//×îºóÒ»¸öÊı×éÔªËØ´æ·Å±¾³µÎ»ÖÃĞÅÏ¢
+		//æœ€åä¸€ä¸ªæ•°ç»„å…ƒç´ å­˜æ”¾æœ¬è½¦ä½ç½®ä¿¡æ¯
 		position[N] = thisCar->Position[0];
 
-		//Î»ÖÃ´Ó´óµ½Ğ¡ÅÅĞò£¬±¾³µÎ»ÖÃÒ²²ÎÓëÁËÅÅĞò
+		//ä½ç½®ä»å¤§åˆ°å°æ’åºï¼Œæœ¬è½¦ä½ç½®ä¹Ÿå‚ä¸äº†æ’åº
 		sort(position, N + 1);
 
-		//Ç°³µÎ»ÖÃ£¬ºó³µÎ»ÖÃ
+		//å‰è½¦ä½ç½®ï¼Œåè½¦ä½ç½®
 		double frontcarpos, followcarpos;
 
-		//ÓëÏàÁÚÇ°³µ¾àÀë£¬ÓëÏàÁÚºó³µ¾àÀë
+		//ä¸ç›¸é‚»å‰è½¦è·ç¦»ï¼Œä¸ç›¸é‚»åè½¦è·ç¦»
 		double DistanceF, DistanceB;
 
-		//¼ÆËãµ±Ç°³µÁ¾ÓëÏàÁÚ³µµÀ×î½üÇ°³µÓëºó³µµÄ¾àÀë
+		//è®¡ç®—å½“å‰è½¦è¾†ä¸ç›¸é‚»è½¦é“æœ€è¿‘å‰è½¦ä¸åè½¦çš„è·ç¦»
 		for (int k = 0; k < N + 1; k++)
 		{
 			if (position[k] == thisCar->Position[0])
@@ -497,7 +497,7 @@ void Road::LaneChange(CObList* &plist, CObList* &planechange, Vehicle* &thisCar,
 				FrontCar = car;
 		}
 
-		//Âú×ã»»µÀÌõ¼ş¾Í ±äµÀ 
+		//æ»¡è¶³æ¢é“æ¡ä»¶å°± å˜é“ 
 		if ((thisCar->Headway<2 * xfc) && (DistanceF>thisCar->Headway) && (DistanceB>xfc))
 		{
 			InsertAtMiddle(plist, planechange, thisCar, FrontCar, i);
@@ -509,18 +509,18 @@ void Road::LaneChange(CObList* &plist, CObList* &planechange, Vehicle* &thisCar,
 
 
 
-/////Ö÷º¯Êı/////
+/////ä¸»å‡½æ•°/////
 void SelfStabilization()
 {
-	//³õÊ¼»¯
+	//åˆå§‹åŒ–
 	Road LeftLane, RightLane;
 	CObList* LeftQueue = &LeftLane.queue;
 	CObList* RightQueue = &RightLane.queue;
 
 
-	int circleTimes = 150000;  //Ñ­»·½øĞĞ´ÎÊı
-	double d = 0.5;				//³õÊ¼»¯³µÁ÷ÃÜ¶È
-	double xfc = 0.5;			//ÀíÏë°²È«³µ¼ä¾à
+	int circleTimes = 150000;  //å¾ªç¯è¿›è¡Œæ¬¡æ•°
+	double d = 0.5;				//åˆå§‹åŒ–è½¦æµå¯†åº¦
+	double xfc = 0.5;			//ç†æƒ³å®‰å…¨è½¦é—´è·
 
 
 
@@ -529,46 +529,46 @@ void SelfStabilization()
 		double Speed1 = 0;
 		double Speed2 = 0;
 		double AverageSpeed = 0;
-		int LeftVehicleSum = 100;			//×ó³µµÀ×Ü³µÁ¾Êı
-		int RightVehicleSum = 100;			//ÓÒ³µµÀ×Ü³µÁ¾Êı
+		int LeftVehicleSum = 100;			//å·¦è½¦é“æ€»è½¦è¾†æ•°
+		int RightVehicleSum = 100;			//å³è½¦é“æ€»è½¦è¾†æ•°
 /////////////////////////////////////////////////////////////////
 
-		int tao = 100;						//ÑÓÊ±
+		int tao = 100;						//å»¶æ—¶
 		
 /////////////////////////////////////////////////////////////////		
-		double iniHeadway = (1.0) / d;		//³õÊ¼³µ¼ä¾à
-		double iniDistf = iniHeadway / 2;   //³õÊ¼ÏàÁÚ³µµÀ³µÍ·¾à
-		const double L = 200;				//³µµÀ×Ü³¤¶È
+		double iniHeadway = (1.0) / d;		//åˆå§‹è½¦é—´è·
+		double iniDistf = iniHeadway / 2;   //åˆå§‹ç›¸é‚»è½¦é“è½¦å¤´è·
+		const double L = 200;				//è½¦é“æ€»é•¿åº¦
 		
 
-		double iniHeadwayL = 1.7;				//³õÊ¼×ó³µµÀ³µ¼ä¾à
-		double iniHeadwayR = 1.8;				//³õÊ¼ÓÒ³µµÀ³µ¼ä¾à
-		double iniSpeedL = 0.5*2.0*(tanh(iniHeadway - 1.7) + tanh(1.7)); //×ó³µµÀ³õÊ¼ËÙ¶È
-		double iniSpeedR = 0.5*1.5*(tanh(iniHeadway - 1.8) + tanh(1.8));	//ÓÒ³µµÀ³õÊ¼ËÙ¶È
+		double iniHeadwayL = 1.7;				//åˆå§‹å·¦è½¦é“è½¦é—´è·
+		double iniHeadwayR = 1.8;				//åˆå§‹å³è½¦é“è½¦é—´è·
+		double iniSpeedL = 0.5*2.0*(tanh(iniHeadway - 1.7) + tanh(1.7)); //å·¦è½¦é“åˆå§‹é€Ÿåº¦
+		double iniSpeedR = 0.5*1.5*(tanh(iniHeadway - 1.8) + tanh(1.8));	//å³è½¦é“åˆå§‹é€Ÿåº¦
 
-//³õÊ¼»¯£¬×óÓÒ³µµÀ¼Ó³µ
-//   µÀÂ·¼Ó³µº¯Êı		³µµÀÁ´±í			³µÁ¾Êı				³µµÀ³¤¶È			 ÀíÏë³µÍ·¾à				³µµÀºÅ				 ÓÅ»¯ËÙ¶È          ÁÖ³µµÀ³µÍ·¾à
+//åˆå§‹åŒ–ï¼Œå·¦å³è½¦é“åŠ è½¦
+//   é“è·¯åŠ è½¦å‡½æ•°		è½¦é“é“¾è¡¨			è½¦è¾†æ•°				è½¦é“é•¿åº¦			 ç†æƒ³è½¦å¤´è·				è½¦é“å·				 ä¼˜åŒ–é€Ÿåº¦          æ—è½¦é“è½¦å¤´è·
 //    AddVehicle(CObList* &plist, const int &carSum, const double &Length, const double &carHeadway, const bool &lanenumber, double OptimumV, double distf)
 		LeftLane.AddVehicle(LeftQueue, LeftVehicleSum, L, iniHeadway, 0, iniSpeedL, iniDistf);//distf
 		RightLane.AddVehicle(RightQueue, RightVehicleSum, L, iniHeadway, 1, iniSpeedR, iniDistf);//distf
 
-		//¿ªÊ¼Ñ­»·
+		//å¼€å§‹å¾ªç¯
 		for (int i = 0; i <= circleTimes; i++)
 		{
-			//µü´ú
-			//      ¼ÓÈë¸ÉÈÅº¯Êı    ³µµÀÁ´±í        ÁÙ³µµÀÁ´±í            ³µµÀ³¤¶È        ³µºÅ     È¨ÖØ				 È¨ÖØ              ÑÓÊ±              °²È«³µ¾à
+			//è¿­ä»£
+			//      åŠ å…¥å¹²æ‰°å‡½æ•°    è½¦é“é“¾è¡¨        ä¸´è½¦é“é“¾è¡¨            è½¦é“é•¿åº¦        è½¦å·     æƒé‡				 æƒé‡              å»¶æ—¶              å®‰å…¨è½¦è·
             //    Iteration(CObList* &plist, CObList* &planechange, const double &L, int i, const double &ay, const double &aq, const int &tao, const double &hd)
 			LeftLane.Iteration(LeftQueue, RightQueue, L, i, 0.7, 0.3, tao, 2);
 			RightLane.Iteration(RightQueue, LeftQueue, L, i, 0.8, 0.2, tao, 2);
 
-			//¸üĞÂ
-			//    µÀÂ·¸üĞÂ    Ê±¿Ì         ³µµÀ              ÁÙ³µµÀ              °²È«¾àÀë       ³µµÀ³¤¶È       ÑÓÊ±
+			//æ›´æ–°
+			//    é“è·¯æ›´æ–°    æ—¶åˆ»         è½¦é“              ä¸´è½¦é“              å®‰å…¨è·ç¦»       è½¦é“é•¿åº¦       å»¶æ—¶
             //	  Update(int time, CObList* &plist, CObList* &planechange, double &xfc, const double &L, const int &tao)
 			LeftLane.Update(i, LeftQueue, RightQueue, xfc, L, tao);
 			RightLane.Update(i, RightQueue, LeftQueue, xfc, L, tao);
 
 			cout << i << endl;
-			//¼ÆÊ±
+			//è®¡æ—¶
 		}
 
 		d += 0.05;
@@ -579,7 +579,7 @@ void SelfStabilization()
 }
 
 
-/////Ö÷º¯Êı//////
+/////ä¸»å‡½æ•°//////
 int main()
 {
 	SelfStabilization();
